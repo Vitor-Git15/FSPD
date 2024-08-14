@@ -1,0 +1,41 @@
+/*
+Author: Vitor Emanuel Ferreira Vital
+Email: vitoremanuelg147@gmail.com
+Date: 01/2024
+*/
+
+// versão do protocol buffer
+syntax = "proto3";
+
+// nome do pacote
+package loja;
+
+// serviço a ser exportado + procedimentos
+service Loja{
+    rpc get_price (PriceRequest) returns (PriceResponse);
+    rpc sale (SaleRequest) returns (SaleResponse);
+    rpc end_execution (EndExecutionRequest) returns (EndExecutionResponse);
+}
+
+// definições dos tipos dos parâmetros
+message PriceRequest {}
+
+message PriceResponse {
+    int32 price = 1;
+}
+
+message SaleRequest {
+    int32 order_id = 1;
+}
+
+message SaleResponse {
+    int32 status = 1;
+    int32 amount_received = 2;
+}
+
+message EndExecutionRequest {}
+
+message EndExecutionResponse {
+    int32 seller_balance = 1;
+    int32 bank_server_status = 2;
+}

@@ -1,0 +1,58 @@
+/*
+Author: Vitor Emanuel Ferreira Vital
+Email: vitoremanuelg147@gmail.com
+Date: 01/2024
+*/
+
+// versão do protocol buffer
+syntax = "proto3";
+
+// nome do pacote
+package banco;
+
+// serviço a ser exportado + procedimentos
+service Banco{
+
+    rpc get_balance(BalanceRequest) returns (BalanceResponse);
+
+    rpc create_payment_order(PaymentOrderRequest) returns (OrderResponse);
+
+    rpc transfer(TransferRequest) returns (TransferResponse);
+
+    rpc end_execution(EndExecutionRequest) returns (EndExecutionResponse);
+}
+
+// definições dos tipos dos parâmetros
+
+message BalanceRequest{
+    string wallet_id = 1;
+}
+
+message BalanceResponse {
+    int32 balance = 1;
+}
+
+message PaymentOrderRequest {
+    string wallet_id = 1;
+    int32 amount = 2;
+}
+
+message OrderResponse {
+    int32 status = 1;
+}
+
+message TransferRequest {
+    int32 order_id = 1;
+    int32 confirmation_amount = 2;
+    string wallet_id = 3;
+}
+
+message TransferResponse {
+    int32 status = 1;
+}
+
+message EndExecutionRequest {}
+
+message EndExecutionResponse {
+    int32 pending_orders = 1;
+}
